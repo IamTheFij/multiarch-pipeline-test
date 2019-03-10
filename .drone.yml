@@ -4,8 +4,10 @@ name: amd64
 steps:
   - name: build
     image: docker
-    commands:
-      - make build
+    settings:
+      repo: iamthefij/multiarch-pipeline-test
+      auto_tag: true
+      auto_tag_suffix: linux-amd64
 
 ---
 kind: pipeline
@@ -14,5 +16,10 @@ name: arm
 steps:
   - name: build
     image: docker
-    commands:
-      - make cross-build-arm
+    settings:
+      repo: iamthefij/multiarch-pipeline-test
+      auto_tag: true
+      auto_tag_suffix: linux-arm32v6
+      build_args:
+        - ARCH=arm
+        - REPO=arm32v6
