@@ -37,7 +37,7 @@ steps:
     settings:
       repo: iamthefij/multiarch-pipeline-test
       auto_tag: true
-      auto_tag_suffix: linux-arm32v6
+      auto_tag_suffix: linux-arm
       username:
         from_secret: docker_username
       password:
