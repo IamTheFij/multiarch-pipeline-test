@@ -2,15 +2,10 @@ kind: pipeline
 name: amd64
 
 steps:
-  - name: qemu
-    image: plugins/download
-    source: https://github.com/multiarch/qemu-user-static/releases/download/v2.9.1-1/x86_64_qemu-x86_64-static.tar.gz
-
-  - name: prep
+  - name: Get qemu
     image: busybox
     commands:
-      - tar -xvf x86_64_qemu-x86_64-static.tar.gz
-      - rm x86_64_qemu-x86_64-static.tar.gz
+      - make build/qemu-x86_64-static
 
   - name: build
     image: plugins/docker
@@ -28,6 +23,11 @@ kind: pipeline
 name: arm
 
 steps:
+  - name: Get qemu
+    image: busybox
+    commands:
+      - make build/qemu-arm-static
+
   - name: build
     image: plugins/docker
     settings:
