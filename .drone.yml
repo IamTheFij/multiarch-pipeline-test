@@ -1,8 +1,8 @@
 kind: pipeline
-name: amd64
+name: linux-amd64
 
 steps:
-  - name: Get qemu
+  - name: get qemu
     image: ubuntu:bionic
     commands:
       - apt-get update
@@ -22,10 +22,10 @@ steps:
 
 ---
 kind: pipeline
-name: arm
+name: linux-arm
 
 steps:
-  - name: Get qemu
+  - name: get qemu
     image: ubuntu:bionic
     commands:
       - apt-get update
@@ -45,3 +45,24 @@ steps:
       build_args:
         - ARCH=arm
         - REPO=arm32v6
+
+---
+kind: pipeline
+name: manifest
+
+depends_on:
+  - linux-amd64
+  - linux-arm
+
+steps:
+  - name: publish manifest
+    image: plugins/manifest
+    settings:
+      spec: manifest.tmpl
+      auto_tag: true
+      ignore_missing: true
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
