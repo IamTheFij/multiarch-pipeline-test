@@ -3,7 +3,7 @@ name: amd64
 
 steps:
   - name: build
-    image: docker
+    image: plugins/docker
     settings:
       repo: iamthefij/multiarch-pipeline-test
       auto_tag: true
@@ -19,7 +19,7 @@ name: arm
 
 steps:
   - name: build
-    image: docker
+    image: plugins/docker
     settings:
       repo: iamthefij/multiarch-pipeline-test
       auto_tag: true
