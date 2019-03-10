@@ -6,7 +6,7 @@ steps:
     image: ubuntu:bionic
     commands:
       - apt-get update
-      - apt-get install make wget
+      - apt-get install -y --no-install-recommends make wget
       - make build/qemu-x86_64-static
 
   - name: build
@@ -29,7 +29,7 @@ steps:
     image: ubuntu:bionic
     commands:
       - apt-get update
-      - apt-get install make wget
+      - apt-get install -y --no-install-recommends make wget
       - make build/qemu-arm-static
 
   - name: build
