@@ -2,6 +2,16 @@ kind: pipeline
 name: amd64
 
 steps:
+  - name: qemu
+    image: plugins/download
+    source: https://github.com/multiarch/qemu-user-static/releases/download/v2.9.1-1/x86_64_qemu-x86_64-static.tar.gz
+
+  - name: prep
+    image: busybox
+    commands:
+      - tar -xvf x86_64_qemu-x86_64-static.tar.gz
+      - rm x86_64_qemu-x86_64-static.tar.gz
+
   - name: build
     image: plugins/docker
     settings:
