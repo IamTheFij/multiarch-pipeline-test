@@ -8,6 +8,10 @@ steps:
       repo: iamthefij/multiarch-pipeline-test
       auto_tag: true
       auto_tag_suffix: linux-amd64
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
 
 ---
 kind: pipeline
@@ -20,6 +24,10 @@ steps:
       repo: iamthefij/multiarch-pipeline-test
       auto_tag: true
       auto_tag_suffix: linux-arm32v6
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
       build_args:
         - ARCH=arm
         - REPO=arm32v6
