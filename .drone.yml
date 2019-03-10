@@ -3,7 +3,7 @@ name: amd64
 
 steps:
   - name: Get qemu
-    image: busybox
+    image: ubuntu:bionic
     commands:
       - make build/qemu-x86_64-static
 
@@ -24,7 +24,7 @@ name: arm
 
 steps:
   - name: Get qemu
-    image: busybox
+    image: ubuntu:bionic
     commands:
       - make build/qemu-arm-static
 
