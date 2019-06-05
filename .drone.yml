@@ -1,13 +1,38 @@
 kind: pipeline
-name: linux-amd64
+name: tests
+
+trigger:
+  event:
+    - push
+    - tag
 
 steps:
-  - name: get qemu
+  - name: run tests
     image: ubuntu:bionic
     commands:
       - apt-get update
-      - apt-get install -y make wget
-      - make build/qemu-x86_64-static
+      - apt-get install -y make
+      - make test
+
+---
+kind: pipeline
+name: linux-amd64
+
+depends_on:
+  - tests
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - tag
+
+steps:
+  - name: get qemu
+    image: busybox
+    commands:
+      - ./get_qemu.sh x86_64
 
   - name: build
     image: plugins/docker
@@ -24,13 +49,21 @@ steps:
 kind: pipeline
 name: linux-arm
 
+depends_on:
+  - tests
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - tag
+
 steps:
   - name: get qemu
-    image: ubuntu:bionic
+    image: busybox
     commands:
-      - apt-get update
-      - apt-get install -y make wget
-      - make build/qemu-arm-static
+      - ./get_qemu.sh arm
 
   - name: build
     image: plugins/docker
@@ -48,11 +81,53 @@ steps:
 
 ---
 kind: pipeline
+name: linux-arm64
+
+depends_on:
+  - tests
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - tag
+
+steps:
+  - name: get qemu
+    image: busybox
+    commands:
+      - ./get_qemu.sh arm64
+
+  - name: build
+    image: plugins/docker
+    settings:
+      repo: iamthefij/multiarch-pipeline-test
+      auto_tag: true
+      auto_tag_suffix: linux-arm64
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      build_args:
+        - ARCH=arm64
+        - REPO=arm64v8
+
+---
+kind: pipeline
 name: manifest
 
 depends_on:
   - linux-amd64
   - linux-arm
+  - linux-arm64
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
+    - tag
 
 steps:
   - name: publish manifest
