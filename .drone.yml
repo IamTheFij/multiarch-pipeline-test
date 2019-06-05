@@ -32,7 +32,7 @@ steps:
   - name: get qemu
     image: busybox
     commands:
-      - ./get_qemu.sh x86_64
+      - sh ./get_qemu.sh x86_64
 
   - name: build
     image: plugins/docker
@@ -63,7 +63,7 @@ steps:
   - name: get qemu
     image: busybox
     commands:
-      - ./get_qemu.sh arm
+      - sh ./get_qemu.sh arm
 
   - name: build
     image: plugins/docker
@@ -97,7 +97,7 @@ steps:
   - name: get qemu
     image: busybox
     commands:
-      - ./get_qemu.sh arm64
+      - sh ./get_qemu.sh arm64
 
   - name: build
     image: plugins/docker
