@@ -97,7 +97,7 @@ steps:
   - name: get qemu
     image: busybox
     commands:
-      - sh ./get_qemu.sh arm64
+      - sh ./get_qemu.sh aarch64
 
   - name: build
     image: plugins/docker
@@ -110,7 +110,7 @@ steps:
       password:
         from_secret: docker_password
       build_args:
-        - ARCH=arm64
+        - ARCH=aarch64
         - REPO=arm64v8
 
 ---
