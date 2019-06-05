@@ -18,7 +18,7 @@ This is the root of the "magic". This file includes inline documentation as well
 
 Many library images now [support multiple architechtures](https://github.com/docker-library/official-images#architectures-other-than-amd64) and do so by providing them under a different prefix repo.
 
-However, some images use a tag suffix format. In fact, that will be the output of this pipeline. Something like `user/image:linux-amd64` and `user/image:linux-arm`, etc. It's still possible to build based on those images. To do so, instead of a `REPO` arg, you can rename it to `TAG_SUFFIX` and update the `FROM` statement in the `Dockerfile` to something like `FROM user/image:v1.0.0${TAG_SUFFIX}`.
+However, some images use a tag suffix format. In fact, that will be the output of this pipeline. Something like `user/image:linux-amd64` and `user/image:linux-arm`, etc. It's still possible to build based on those images. To do so, instead of a `REPO` arg, you can rename it to `TAG_SUFFIX` and update the `FROM` statement in the `Dockerfile` to something like `FROM user/image:1.0.0-${TAG_SUFFIX}`.
 
 If you do rename the build arg, you must also rename the arg in the `Makefile` and `.drone.yml`.
 
