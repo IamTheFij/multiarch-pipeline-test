@@ -22,11 +22,12 @@ depends_on:
   - tests
 
 trigger:
-  branch:
-    - master
   event:
     - push
     - tag
+  ref:
+    - refs/heads/master
+    - refs/tags/v*
 
 steps:
   - name: get qemu
@@ -53,11 +54,12 @@ depends_on:
   - tests
 
 trigger:
-  branch:
-    - master
   event:
     - push
     - tag
+  ref:
+    - refs/heads/master
+    - refs/tags/v*
 
 steps:
   - name: get qemu
@@ -87,11 +89,12 @@ depends_on:
   - tests
 
 trigger:
-  branch:
-    - master
   event:
     - push
     - tag
+  ref:
+    - refs/heads/master
+    - refs/tags/v*
 
 steps:
   - name: get qemu
@@ -123,11 +126,12 @@ depends_on:
   - linux-arm64
 
 trigger:
-  branch:
-    - master
   event:
     - push
     - tag
+  ref:
+    - refs/heads/master
+    - refs/tags/v*
 
 steps:
   - name: publish manifest
