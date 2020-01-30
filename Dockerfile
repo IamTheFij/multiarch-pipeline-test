@@ -8,7 +8,7 @@ FROM ${REPO}/python:3-alpine
 
 # This should be the target qemu arch
 ARG ARCH=x86_64
-COPY --from=qemu-user-static /usr/bin/qemu-* /usr/bin/
+COPY --from=qemu-user-static /usr/bin/qemu-${ARCH}-* /usr/bin/
 
 # Everything below here is just a simple example
 
