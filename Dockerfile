@@ -5,7 +5,7 @@ ARG REPO=library
 FROM multiarch/qemu-user-static:4.2.0-2 as qemu-user-static
 RUN ls -al /usr
 RUN ls -al /usr/bin
-RUN touch /usr/bin/dummy
+RUN echo "" > /usr/bin/dummy
 RUN ls -al /usr/bin
 
 FROM ${REPO}/python:3-alpine
