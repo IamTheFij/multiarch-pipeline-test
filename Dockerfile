@@ -3,6 +3,7 @@
 # Other repositories may use tag suffix instead
 ARG REPO=library
 FROM multiarch/qemu-user-static:4.2.0-2 as qemu-user-static
+RUN touch /usr/bin/dummy
 
 FROM ${REPO}/python:3-alpine
 
