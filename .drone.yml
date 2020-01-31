@@ -1,25 +1,26 @@
-kind: pipeline
-name: tests
-
-trigger:
-  event:
-    - push
-    - tag
-
-steps:
-  - name: run tests
-    image: ubuntu:bionic
-    commands:
-      - apt-get update
-      - apt-get install -y make
-      - make test
+# ---
+# kind: pipeline
+# name: tests
+#
+# trigger:
+#   event:
+#     - push
+#     - tag
+#
+# steps:
+#   - name: run tests
+#     image: ubuntu:bionic
+#     commands:
+#       - apt-get update
+#       - apt-get install -y make
+#       - make test
 
 ---
 kind: pipeline
 name: linux-amd64
 
-depends_on:
-  - tests
+# depends_on:
+#   - tests
 
 trigger:
   event:
@@ -45,8 +46,8 @@ steps:
 kind: pipeline
 name: linux-arm
 
-depends_on:
-  - tests
+# depends_on:
+#   - tests
 
 trigger:
   event:
@@ -75,8 +76,8 @@ steps:
 kind: pipeline
 name: linux-arm64
 
-depends_on:
-  - tests
+# depends_on:
+#   - tests
 
 trigger:
   event:

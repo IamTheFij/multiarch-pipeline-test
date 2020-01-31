@@ -3,10 +3,16 @@
 # Other repositories may use tag suffix instead
 ARG REPO=library
 FROM multiarch/qemu-user-static:4.2.0-2 as qemu-user-static
-RUN ls -al /usr
+
+# What's going on here? Why does the dir go away?
 RUN ls -al /usr/bin
 RUN echo "" > /usr/bin/dummy
 RUN ls -al /usr/bin
+
+# How about bin?
+RUN ls -al /bin
+RUN echo "" > /bin/dummy
+RUN ls -al /bin
 
 FROM ${REPO}/python:3-alpine
 
