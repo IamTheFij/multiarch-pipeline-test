@@ -4,6 +4,12 @@
 ARG REPO=library
 FROM multiarch/qemu-user-static:4.2.0-2 as qemu-user-static
 
+# Try in a new dir
+RUN mkdir /qemu
+RUN touch /qemu/qemu-x86_64-dummy
+RUN cp /usr/bin/qemu-* /qemu/
+RUN ls -al /qemu
+
 # What's going on here? Why does the dir go away?
 RUN ls -al /usr/bin
 RUN echo "" > /usr/bin/dummy
